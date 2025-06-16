@@ -1,0 +1,44 @@
+# depslib dependency file v1.0
+1591190007 source:c:\users\ddobromirov\documents\codeblocks-projs\exportsecurequery\main.cpp
+	<stdio.h>
+	<string.h>
+	<conio.h>
+	<malloc.h>
+	<iostream>
+	"main.h"
+	"common.h"
+	"mytypes.h"
+	"skip.h"
+	"platform.h"
+
+1591191736 c:\users\ddobromirov\documents\codeblocks-projs\exportsecurequery\common.h
+	"mytypes.h"
+
+1412780414 c:\users\ddobromirov\documents\codeblocks-projs\exportsecurequery\mytypes.h
+
+1464771580 source:e:\documents\codeblocks-projs\exportsecurequery\main.cpp
+	<stdio.h>
+	<string.h>
+	<conio.h>
+	<malloc.h>
+	<iostream>
+	"common.h"
+	"mytypes.h"
+
+1448026380 e:\documents\codeblocks-projs\exportsecurequery\common.h
+	"mytypes.h"
+
+1412780414 e:\documents\codeblocks-projs\exportsecurequery\mytypes.h
+
+1589467334 c:\users\ddobromirov\documents\codeblocks-projs\exportsecurequery\main.h
+
+1567166812 c:\users\ddobromirov\documents\codeblocks-projs\exportsecurequery\skip.h
+	"mytypes.h"
+	"mydefine.h"
+
+1567423810 c:\users\ddobromirov\documents\codeblocks-projs\exportsecurequery\mydefine.h
+
+1567004502 c:\users\ddobromirov\documents\codeblocks-projs\exportsecurequery\platform.h
+	<windows.h>
+	<unistd.h>
+

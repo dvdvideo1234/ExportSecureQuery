@@ -1,0 +1,5 @@
+MaxColumnID:999999
+SysLogging:1
+ReadDelay: 200
+SkipNulls:0
+FieldSkip:
