@@ -23,7 +23,9 @@ x: Nothing has been found on this line
 # How to use
 Export some stuff from PL/SQL Developer as *.sql then drop the file onto the executable.
 
-# For compiling my projects I use [Code::Blocks][ref-code-block]. I do not like Visual Studio and I never will.
+# Compiling
+For all of my projects I aim to use [Code::Blocks][ref-code-block] as it is highly accessible and customizable.
+I do not like Visual Studio and I never will It is too damn weird for path different than `C:\`.
 
 [ref-code-block]: https://www.codeblocks.org/
 [ref-settings]: https://github.com/dvdvideo1234/ExportSecureQuery/tree/main/settings
