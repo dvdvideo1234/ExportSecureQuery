@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1591190007 source:c:\users\ddobromirov\documents\codeblocks-projs\exportsecurequery\main.cpp
+1772087964 source:c:\users\ddobromirov\documents\codeblocks-projs\exportsecurequery\main.cpp
 	<stdio.h>
 	<string.h>
 	<conio.h>
@@ -11,7 +11,7 @@
 	"skip.h"
 	"platform.h"
 
-1591191736 c:\users\ddobromirov\documents\codeblocks-projs\exportsecurequery\common.h
+1591253002 c:\users\ddobromirov\documents\codeblocks-projs\exportsecurequery\common.h
 	"mytypes.h"
 
 1412780414 c:\users\ddobromirov\documents\codeblocks-projs\exportsecurequery\mytypes.h
@@ -30,7 +30,7 @@
 
 1412780414 e:\documents\codeblocks-projs\exportsecurequery\mytypes.h
 
-1589467334 c:\users\ddobromirov\documents\codeblocks-projs\exportsecurequery\main.h
+1591252859 c:\users\ddobromirov\documents\codeblocks-projs\exportsecurequery\main.h
 
 1567166812 c:\users\ddobromirov\documents\codeblocks-projs\exportsecurequery\skip.h
 	"mytypes.h"

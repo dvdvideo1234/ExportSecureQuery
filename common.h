@@ -300,7 +300,7 @@
   {
     if(PointerIsNull(D)){ return; }
     if(PointerIsNull(S)){ return; }
-    u32 s,d,k;
+    u32 s=0,d=0,k=0;
     s = BytesU32(&S[0]);
     d = BytesU32(&D[0]);
     if(d >= s) k = s;
