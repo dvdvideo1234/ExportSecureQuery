@@ -1,9 +1,9 @@
 /*$T main.cpp GC 1.140 08/30/19 09:24:27 */
 
 /*
- * Author : Deyan Dobromirov Author e-mail: dvd_video@abv.bg
- * Compile: -static-libstdc++ -static-libgcc -static
- */
+ * WARNING !!!! This program is property of CODIX Ltd. Bulgaria ! If you did
+ * obtain this by any chance and you are not authorized to do so and/or see this
+ * code, contact CODIX Corporation immediately !!! You are not allowed to
 #include <stdio.h>
 #include <string.h>
 #include <conio.h>
@@ -64,7 +64,7 @@ s32 main(s32 argc, s8 *argv[])
   u32   StringIndent = 0;
   u32   LongFieldLen = 0;
   /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-
+  printf("It's time to eat your query. I am so hungry !");
 
   if(argc < 2)
   {
@@ -92,42 +92,47 @@ s32 main(s32 argc, s8 *argv[])
   }
 
   /* INITIALIZATION */
-  sprintf(TEMPBUFF,"mkdir %s",SETTING_FOLD);
+  sprintf(TEMPBUFF,"if not exist \"%s\" md \"%s\"",SETTING_FOLD, SETTING_FOLD);
   system(TEMPBUFF);
 
-  /* Open IN-OUT stream */
+  /* Open IN stream */
   I = fopen(argv[1],"rb");
-  printf(">[%s]\n",argv[1]);
+  if(I == NULL)
+  {
+    printf("\nFailed to open input [%s] !", argv[1]);
+    system("PAUSE");
+    return EXIT_SUCCESS;
+  }
+  else
+  {
+    printf("\nInputs: [%s] !",argv[1]);
+  }
+
+  /* Open OUT stream */
   strncpy(TEMPBUFF,argv[1],OTHER_LEN);
   strncpy(strstr(TEMPBUFF, QUERY_EXT),OFILE_SUFF,OTHER_LEN);
   strcat(TEMPBUFF,QUERY_EXT);
   O = fopen(TEMPBUFF,"wb");
-  printf("<[%s]\n",TEMPBUFF);
+  if(O == NULL)
+  {
+    printf("\nFailed to open output: [%s] !", TEMPBUFF);
+    system("PAUSE");
+    return EXIT_SUCCESS;
+  }
+  else
+  {
+    printf("\nOutput: [%s] !",TEMPBUFF);
+  }
 
-  /* Open parameters */
+  /* Open PARAMS stream */
   strncpy(TEMPBUFF,SETTING_FOLD,OTHER_LEN);
   strcat(TEMPBUFF,"\\");
   strcat(TEMPBUFF,PARAM_NAME);
   strcat(TEMPBUFF,FTEXT_EXT);
   P = fopen(TEMPBUFF,"rb");
-  printf("Open parameters [%s]\n",TEMPBUFF);
-  if(!I)
+  if(P == NULL)
   {
-    printf("\nFailed to open input!!");
-    system("PAUSE");
-    return EXIT_SUCCESS;
-  }
-
-  if(!O)
-  {
-    printf("\nFailed to open output!!");
-    system("PAUSE");
-    return EXIT_SUCCESS;
-  }
-
-  if(!P)
-  {
-    printf("\nFailed to open parameters!!");
+    printf("\nFailed to open parameters !");
     printf("\nGestating capsule ...");
     P = fopen(TEMPBUFF,"wb");
     if(P != NULL)
@@ -142,13 +147,27 @@ s32 main(s32 argc, s8 *argv[])
       fprintf(O,"Drag the input file below over the executable!\n");
       fprintf(O,"Inpit: %s\n",argv[1]);
 
+      fflush(P);
       fclose(P);
-      fclose(I);
+      fflush(O);
       fclose(O);
+      fclose(I);
+      printf("\nCapsule created !");
+    }
+    else
+    {
+      fflush(O);
+      fclose(O);
+      fclose(I);
+      printf("\nCapsule missed !");
     }
 
     sleep(GESTATING_TM);
     return EXIT_SUCCESS;
+  }
+  else
+  {
+    printf("\nParams: [%s] ",TEMPBUFF);
   }
 
   /* PARAMETERS */
@@ -159,7 +178,7 @@ s32 main(s32 argc, s8 *argv[])
   fscanf(P,"SkipNulls:%u\n",&SkipNulls);  /* Skip NULL values in the query ( reduce output length ) */
   fscanf(P,"FieldSkip:%s\n",FieldSkip);   /* Relative directory path to column skip definition */
   fclose(P);
-  printf("Params = {%u,%u,%u,%u,%s}\n",ParamCnt,Dump,Deal,SkipNulls,FieldSkip);
+  printf("= {%u,%u,%u,%u,%s}",ParamCnt,Dump,Deal,SkipNulls,FieldSkip);
 
   if(Dump)
   {
@@ -169,7 +188,7 @@ s32 main(s32 argc, s8 *argv[])
     strcat(TEMPBUFF,FTEXT_EXT);
     L = fopen(TEMPBUFF,"wb");
     Dump = ((L != NULL) && Dump);
-    printf("Open logs [%u][%s]\n",Dump,TEMPBUFF);
+    printf(" : [%u][%s]",Dump,TEMPBUFF);
   }
 
   if(Dump)
@@ -182,7 +201,8 @@ s32 main(s32 argc, s8 *argv[])
     fprintf(L,"\nFieldSkip  :[%s]",FieldSkip);
     if(PRINT_ARGS)
     {
-      for(iArg = 0; iArg < argc; iArg++) fprintf(L,"\n[%2d]:<%s>",iArg,argv[iArg]);
+      for(iArg = 0; iArg < argc; iArg++)
+        fprintf(L,"\n[%d]:<%s>",iArg,argv[iArg]);
     }
   }
 
@@ -194,17 +214,22 @@ s32 main(s32 argc, s8 *argv[])
     fprintf(O,"\nKeep in mind that strings are evaluated to 0s.");
     fclose(I);
     fclose(O);
+    fclose(P);
     if(Dump)
     {
       fprintf(L,"\nMax column ID cannot be zero !");
       fprintf(L,"\nCheck parameters in [%s\\%s%s] !",SETTING_FOLD,PARAM_NAME,FTEXT_EXT);
       fclose(L);
     }
-
     return EXIT_SUCCESS;
   }
 
-  printf("Processing...\n");
+  printf("\nProcessing...\n");
+  if(Dump)
+  {
+    fprintf(L,"\nProcessing...\n");
+  }
+
   while(!feof(I))
   {
     Delay(Deal);
@@ -537,7 +562,7 @@ s32 main(s32 argc, s8 *argv[])
           }
 
           if(Buff[i] == ',' && FuncIndent == 0 && StringIndent == 0)
-          {     /* Break the values on a comma. If is not a function argument or string */
+          { /* Break the values on a comma. If is not a function argument or string */
             if(Dump) fprintf(L," -> Break !");
             break;
           }
@@ -585,7 +610,7 @@ s32 main(s32 argc, s8 *argv[])
       if(Dump)
       {
         fprintf(L,"\n\nBuff: >>%s<<\n",Buff);
-        fprintf(L,"\nWritten to file !!");
+        fprintf(L,"\nWritten to file !");
       }
 
       if(Deal)
@@ -660,6 +685,10 @@ s32 main(s32 argc, s8 *argv[])
     }
   }
   printf("\nFinalizing...");
+  if(Dump)
+  {
+    fprintf(L,"\nFinalizing...");
+  }
 
   Cnf = 0;
   while(Cnf < OTHER_LEN)
@@ -669,21 +698,19 @@ s32 main(s32 argc, s8 *argv[])
     Cnf++;
   }
 
+  printf("\nMemory freed...");
   if(Dump)
   {
     fprintf(L,"\nMemory freed...");
   }
-  else
-  {
-    printf("\nMemory freed...");
-  }
 
   if(!bFound)
   {
-    printf("\nNothing is found to satisfy my hunger!!");
+    printf("\nNothing is found to satisfy my hunger !");
   }
 
   fclose(I);
+  fclose(P);
   fflush(O);
   fclose(O);
   if(Dump)
@@ -693,7 +720,7 @@ s32 main(s32 argc, s8 *argv[])
     fclose(L);
   }
 
-  printf("\nFiles closed, queries exported, press a key to exit the app!!");
+  printf("\nFiles closed, queries exported, press a key to exit the app !");
 
   printf("\n");
   system("PAUSE");
